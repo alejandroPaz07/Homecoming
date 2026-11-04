@@ -1,0 +1,72 @@
+﻿@model Homecoming.Models.Estudiante
+
+<div class="container mt-5">
+    <h2 class="mb-4">Registrar estudiante</h2>
+
+    <form asp-controller="Estudiantes"
+          asp-action="Create"
+          method="post">
+
+        <div class="mb-3">
+            <label asp-for="Nombre" class="form-label"></label>
+            <input asp-for="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Apellido" class="form-label"></label>
+            <input asp-for="Apellido" class="form-control" />
+            <span asp-validation-for="Apellido" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Cedula" class="form-label"></label>
+            <input asp-for="Cedula" class="form-control" />
+            <span asp-validation-for="Cedula" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Correo" class="form-label"></label>
+            <input asp-for="Correo" class="form-control" />
+            <span asp-validation-for="Correo" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Nivel" class="form-label">Nivel</label>
+
+            <select asp-for="Nivel" class="form-select" required>
+                <option value="">Selecciona tu nivel</option>
+                <option value="Primer nivel">Primer nivel</option>
+                <option value="Segundo nivel">Segundo nivel</option>
+                <option value="Tercer nivel">Tercer nivel</option>
+                <option value="Cuarto nivel">Cuarto nivel</option>
+            </select>
+
+            <span asp-validation-for="Nivel" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Modalidad" class="form-label"></label>
+            <input asp-for="Modalidad" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Jornada" class="form-label"></label>
+            <input asp-for="Jornada" class="form-control" readonly />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Guardar estudiante
+        </button>
+
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Volver
+        </a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

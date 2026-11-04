@@ -1,0 +1,35 @@
+﻿
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">HOMECOMING</h1>
+        <p class="lead">Selecciona tu modalidad de inscripción</p>
+    </div>
+
+    <div class="row justify-content-center g-4">
+
+        <div class="col-md-5">
+            <div class="card shadow text-center p-4 h-100">
+                <h2>Presencial</h2>
+                <p>Participa en el evento de manera presencial.</p>
+                <a asp-controller="Home"
+                   asp-action="Presencial"
+                   class="btn btn-primary">
+                    Seleccionar
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card shadow text-center p-4 h-100">
+                <h2>Online</h2>
+                <p>Participa en el evento de manera virtual.</p>
+                <a asp-controller="Home"
+                   asp-action="Online"
+                   class="btn btn-dark">
+                    Seleccionar
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>

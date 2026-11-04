@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Homecoming.Models.Estudiante>
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">Panel administrativo</h1>
+
+    <form asp-controller="Auth"
+          asp-action="Logout"
+          method="post"
+          class="mb-3">
+        @Html.AntiForgeryToken()
+
+        <button type="submit" class="btn btn-danger">
+            Cerrar sesión
+        </button>
+    </form>
+
+    <h5 class="mb-3">Estudiantes inscritos</h5>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cédula</th>
+                    <th>Correo</th>
+                    <th>Nivel</th>
+                    <th>Modalidad</th>
+                    <th>Jornada</th>
+                    <th>Cantidad de botellas</th>
+                    <th>Entrega</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var estudiante in Model)
+                {
+                    <tr>
+                        <td>@estudiante.Nombre @estudiante.Apellido</td>
+                        <td>@estudiante.Cedula</td>
+                        <td>@estudiante.Correo</td>
+                        <td>@estudiante.Nivel</td>
+                        <td>@estudiante.Modalidad</td>
+                        <td>@estudiante.Jornada</td>
+
+                        <td>@estudiante.CantidadBotellas</td>
+
+                        <td>
+                            @if (estudiante.BotellasEntregadas)
+                            {
+                                <span class="badge bg-success">
+                                    Entregado
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">
+                                    Pendiente
+                                </span>
+                            }
+                        </td>
+
+                        <td>
+                            @if (!estudiante.BotellasEntregadas)
+                            {
+                                <form asp-controller="Admin"
+                                      asp-action="ConfirmarEntrega"
+                                      asp-route-id="@estudiante.Id"
+                                      method="post">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <input type="number"
+                                           name="cantidad"
+                                           min="1"
+                                           required
+                                           class="form-control form-control-sm mb-2"
+                                           placeholder="Cantidad" />
+
+                                    <button type="submit"
+                                            class="btn btn-success btn-sm mb-2">
+                                        Confirmar entrega
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="d-block mb-2">Confirmado</span>
+                            }
+
+                            <form asp-controller="Admin"
+                                  asp-action="Eliminar"
+                                  asp-route-id="@estudiante.Id"
+                                  method="post"
+                                  onsubmit="return confirm('¿Estás seguro de eliminar este estudiante? Esta acción no se puede deshacer.');">
+
+                                @Html.AntiForgeryToken()
+
+                                <button type="submit"
+                                        class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
